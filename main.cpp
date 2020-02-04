@@ -15,6 +15,17 @@ int TailLength;
 enum eDirection {STOP = 0, LEFT, RIGHT, UP, DOWN};
 eDirection dir;
 
+void clearScreen()
+{
+    HANDLE hOut;
+    COORD Position;
+
+    hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    Position.X = 0;
+    Position.Y = 0;
+    SetConsoleCursorPosition(hOut, Position);
+}
 
 void Setup()
 {
@@ -29,7 +40,7 @@ void Setup()
 
 void Draw()
 {
-	system("cls"); // Clears the screen
+	clearScreen(); // Clears the screen
 	cout << "Score: " << Score << endl;
 
 	// Top wall
@@ -136,15 +147,19 @@ void Logic()
 	{
 	case LEFT:
 		SnakeX--;
+		Sleep(50);
 		break;
 	case RIGHT:
 		SnakeX++;
+		Sleep(50);
 		break;
 	case UP:
 		SnakeY--;
+		Sleep(50);
 		break;
 	case DOWN:
 		SnakeY++;
+		Sleep(50);
 		break;
 	default:
 		break;
