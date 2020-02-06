@@ -12,6 +12,8 @@ const int Height = 20;
 int SnakeX, SnakeY, FruitX, FruitY, Score;
 int TailX[100], TailY[100];
 int TailLength;
+int obstacleX[3] = {7, 24, 12};
+int obstacleY[3] = {5, 10, 14};
 enum eDirection {STOP = 0, LEFT, RIGHT, UP, DOWN};
 eDirection dir;
 
@@ -54,10 +56,11 @@ void Draw()
 	{
 		for (int j = 0; j < Width; j++)
 		{
-			if (j == 0)
+			if (j == 0 || (j == obstacleX[0] && i == obstacleY[0]) || (j == obstacleX[1] && i == obstacleY[1]) || (j == obstacleX[2] && i == obstacleY[2]))
 			{
 				cout << "\xB2";
 			}
+
 			else if (i == SnakeY && j == SnakeX)
 			{
 				cout << "O";
@@ -175,6 +178,14 @@ void Logic()
 		{
 			bGameOver = true;
 		}
+		else {
+            for (int k = 0; k < 3; k++) {
+                if (SnakeX == obstacleX[k] && SnakeY == obstacleY[k]) {
+                    bGameOver = true;
+                }
+            }
+		}
+
 	}
 
 	// Detects if the snake eats the fruit
@@ -196,4 +207,6 @@ int main()
 		Input();
 		Logic();
 	}
+	cout << "Perdiste." << endl;
+	system("pause");
 }
